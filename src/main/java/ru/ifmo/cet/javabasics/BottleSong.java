@@ -32,12 +32,109 @@ package ru.ifmo.cet.javabasics;
  */
 public class BottleSong {
 
+    private int numOfBottles;
+
+    public static String[] numbers = {
+            "",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen"
+    };
+
+    public static String[] hignumbers = {
+            "",
+            "",
+            "twenty",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety"
+    };
+
+    public static String intToText(int n) {
+        String result = null;
+
+        if (n > 0 && n < 20) {
+            result = numbers[n];
+        }
+
+        if (n >= 20 && n <= 99) {
+            result = hignumbers[n / 10];
+
+            if (!(n % 10 == 0)) {
+                result += " ";
+            } else result += "";
+
+            result += numbers[n % 10];
+        }
+
+        return result;
+    }
+
+
     public BottleSong(int bottleTakenAtOnce) {
-        //TODO
+
+        this.numOfBottles = bottleTakenAtOnce;
     }
 
     public String getBottleSongLyrics() {
-        //TODO
-        throw new UnsupportedOperationException();
+        String resultString = "";
+
+        if (numOfBottles >= 100) {
+            throw new IllegalArgumentException();
+        }
+        if (numOfBottles <= 0) {
+            throw new IllegalArgumentException();
+        }
+
+        if (numOfBottles <= 99 && numOfBottles > 0) {
+
+            int beerNum = 99;
+            String mno = "bottles";
+            while (beerNum > 0) {
+                if (beerNum == 1) {
+                    mno = "bottle";
+                }
+
+                if (numOfBottles > beerNum)
+                    numOfBottles = beerNum;
+
+                resultString += (beerNum + " " + mno + " of beer on the wall, " + beerNum + " " + mno + " of beer.\n");
+                resultString += ("Take " + intToText(numOfBottles) + " down and pass around, ");
+
+                beerNum = beerNum - numOfBottles;
+
+                if (beerNum > 0) {
+                    if (beerNum == 1)
+                        mno = "bottle";
+                    resultString += (beerNum + " " + mno + " of beer on the wall.\n");
+                } else {
+                    resultString += ("no more bottles of beer on the wall.\n");
+                    resultString += ("No more bottles of beer on the wall, no more bottles of beer.\n");
+                    resultString += ("Go to the store and buy some more, 99 bottles of beer on the wall.\n");
+                }
+            }
+
+        }
+        return resultString;
     }
 }
