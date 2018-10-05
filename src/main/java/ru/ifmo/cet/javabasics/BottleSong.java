@@ -80,7 +80,7 @@ public class BottleSong {
         if (n >= 20 && n <= 99) {
             result = hignumbers[n / 10];
 
-            if (!(n % 10 == 0)) {
+            if ((n % 10 != 0)) {
                 result += " ";
             } else result += "";
 
