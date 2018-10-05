@@ -25,7 +25,7 @@ public class WarAndPeaceExercise {
         Map<String, Integer> wordMap = new HashMap<>();
         Arrays.stream(warAndPeaceTxt.replaceAll("[^а-яА-Яa-zA-Z]", " ").split(" "))
                 .map(String::toLowerCase)
-                .filter(word -> !(word.length() < 4)).filter(word -> !word.isEmpty())
+                .filter(word -> (word.length() >= 4)).filter(word -> !word.isEmpty())
                 .forEach(word ->
                         wordMap.put(word, wordMap.getOrDefault(word, 0) + 1));
 
